@@ -100,7 +100,7 @@ section.compact { padding-top: calc(var(--section-y) * 0.7); }
 .hero-tagline { font-family:var(--font-display); font-size:clamp(22px,2.3vw,30px); line-height:1.25; font-weight:400; color:var(--fg); letter-spacing:-.01em; max-width:30ch; text-wrap:balance; }
 .hero-tagline em { font-style:normal; color:var(--accent-1); }
 .hero-side { display:flex; flex-direction:column; gap:16px; color:var(--fg-dim); font-size:15px; max-width:38ch; }
-.hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:8px; }
+.hero-actions { display:flex; flex-direction:column; align-items:flex-start; gap:10px; margin-top:8px; }
 .btn { display:inline-flex; align-items:center; gap:10px; padding:14px 22px; border-radius:999px; border:1px solid var(--line-strong); font-family:var(--font-mono); font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--fg); background:rgba(255,255,255,.02); transition:transform .2s,border-color .2s; }
 .btn:hover { border-color:var(--accent-1); }
 .btn-primary { background:linear-gradient(135deg,var(--accent-1) 0%,var(--accent-2) 100%); border-color:transparent; color:#06060c; font-weight:600; }
@@ -282,8 +282,8 @@ section.compact { padding-top: calc(var(--section-y) * 0.7); }
         <p>Final-year ECE engineer with hands-on experience shipping end-to-end ML, RAG pipelines, and production SaaS. IIT Guwahati E&amp;ICT certified.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#work"><span>See my work</span><span class="arrow">→</span></a>
-          <a class="btn" href="#contact"><span>Get in touch</span><span class="arrow">→</span></a>
-          <a class="btn btn-resume" href="resume.html" download="Tanmay_Kolte_Resume.html"><span>↓</span><span>Resume</span></a>
+          <a class="btn btn-primary" href="#contact"><span>Get in touch</span><span class="arrow">→</span></a>
+          <a class="btn btn-primary" href="resume.html" download="Tanmay_Kolte_Resume.html"><span>↓ Resume</span></a>
         </div>
       </div>
     </div>
