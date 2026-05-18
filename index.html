@@ -228,6 +228,67 @@ section.compact { padding-top: calc(var(--section-y) * 0.7); }
 .egg-btn .egg-key { font-size:10px; padding:3px 7px; border:1px solid var(--line-strong); border-radius:5px; color:var(--accent-1); background:rgba(255,255,255,.02); letter-spacing:.16em; }
 .egg-btn .egg-dot { width:6px; height:6px; border-radius:50%; background:var(--accent-1); box-shadow:0 0 8px var(--accent-1); animation:pulse 2.2s ease-in-out infinite; }
 @media(max-width:600px){ .egg-btn{font-size:10px;padding:8px 12px;bottom:14px;left:14px;} }
+
+/* ── MOBILE ── */
+@media(max-width:480px){
+  :root { --pad:18px; --section-y:90px; }
+
+  /* Nav */
+  .nav-inner { padding:12px var(--pad); }
+  .nav-cta { display:none; }
+  .brand { font-size:12px; }
+
+  /* Hero */
+  .hero { padding-top:80px; padding-bottom:60px; }
+  .hero-inner { gap:20px; }
+  .hero-name { font-size:clamp(52px,16vw,80px); line-height:.9; }
+  .hero-role { font-size:11px; letter-spacing:.1em; gap:6px 10px; }
+  .status-pill { font-size:11px; padding:7px 12px; }
+  .hero-grid { margin-top:24px; gap:24px; }
+  .hero-tagline { font-size:clamp(18px,5vw,22px); }
+  .hero-actions { gap:8px; }
+  .btn { padding:12px 18px; font-size:12px; }
+  .hero-meta { margin-top:40px; gap:14px; padding-top:20px; }
+  .meta-item .k { font-size:clamp(22px,6vw,30px); }
+
+  /* Sections */
+  .section-title { font-size:clamp(28px,7vw,40px); }
+  .section-sub { font-size:15px; }
+
+  /* About */
+  .about-text p { font-size:15px; }
+  .about-card { padding:18px; }
+
+  /* Skills */
+  .skill-head h3 { font-size:18px; }
+
+  /* Projects */
+  .project-card { padding:20px; }
+  .project-title { font-size:clamp(20px,5.5vw,26px); }
+  .project-stat .k { font-size:20px; }
+  .project-desc { font-size:14px; }
+
+  /* Timeline */
+  .timeline { padding-left:20px; }
+  .timeline-item::before { left:-26px; width:10px; height:10px; }
+  .timeline-role { font-size:18px; }
+  .timeline-desc { font-size:14px; }
+
+  /* Education */
+  .edu-card { padding:18px; }
+  .edu-card h3 { font-size:16px; }
+  .edu-card .meta { flex-direction:column; gap:4px; align-items:flex-start; }
+  .cert-row { grid-template-columns:1fr; gap:8px; padding:18px; }
+  .cert-name { font-size:16px; }
+
+  /* Contact */
+  .contact-card { padding:40px 24px; border-radius:16px; }
+  .contact-links { flex-direction:column; align-items:stretch; gap:10px; }
+  .contact-links a { text-align:center; padding:13px 18px; font-size:13px; }
+
+  /* Footer */
+  .footer { padding:24px var(--pad); margin-top:40px; gap:10px; font-size:11px; }
+}
 </style>
 </head>
 <body>
