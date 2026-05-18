@@ -41,6 +41,7 @@ html,body {
   -webkit-font-smoothing: antialiased;
 }
 body { overflow-x: hidden; }
+html { overflow-x: hidden; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 ::selection { background: var(--accent-2-soft); color: var(--fg); }
@@ -231,7 +232,7 @@ section.compact { padding-top: calc(var(--section-y) * 0.7); }
 
 /* ── MOBILE ── */
 @media(max-width:480px){
-  :root { --pad:18px; --section-y:90px; }
+  :root { --pad:16px; --section-y:80px; }
 
   /* Nav */
   .nav-inner { padding:12px var(--pad); }
@@ -239,17 +240,17 @@ section.compact { padding-top: calc(var(--section-y) * 0.7); }
   .brand { font-size:12px; }
 
   /* Hero */
-  .hero { padding-top:80px; padding-bottom:60px; }
-  .hero-inner { gap:20px; }
-  .hero-name { font-size:clamp(52px,16vw,80px); line-height:.9; }
-  .hero-role { font-size:11px; letter-spacing:.1em; gap:6px 10px; }
-  .status-pill { font-size:11px; padding:7px 12px; }
-  .hero-grid { margin-top:24px; gap:24px; }
-  .hero-tagline { font-size:clamp(18px,5vw,22px); }
-  .hero-actions { gap:8px; }
-  .btn { padding:12px 18px; font-size:12px; }
-  .hero-meta { margin-top:40px; gap:14px; padding-top:20px; }
-  .meta-item .k { font-size:clamp(22px,6vw,30px); }
+  .hero { padding-top:76px; padding-bottom:50px; min-height:auto; }
+  .hero-inner { gap:16px; }
+  .hero-name { font-size:clamp(36px,10.5vw,52px); line-height:.9; white-space:nowrap; }
+  .status-pill { font-size:10px; padding:6px 10px; gap:7px; max-width:100%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .hero-role { font-size:10px; letter-spacing:.08em; gap:5px 8px; }
+  .hero-grid { margin-top:20px; gap:20px; }
+  .hero-tagline { font-size:clamp(17px,4.5vw,21px); }
+  .hero-actions { gap:8px; width:100%; }
+  .btn { padding:12px 18px; font-size:12px; width:100%; justify-content:center; }
+  .hero-meta { margin-top:32px; gap:12px; padding-top:18px; }
+  .meta-item .k { font-size:clamp(20px,5.5vw,28px); }
 
   /* Sections */
   .section-title { font-size:clamp(28px,7vw,40px); }
