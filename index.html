@@ -9,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
-/* ----- Tokens ----- */
 :root {
   --bg: #06060c;
   --bg-soft: #0c0c16;
@@ -19,11 +18,10 @@
   --fg: #e8e8f0;
   --fg-dim: #a5a5b8;
   --fg-mute: #6b6b80;
-  /* Locked palette: magenta / orange */
-  --accent-1: oklch(0.7 0.22 350);
-  --accent-2: oklch(0.78 0.18 60);
-  --accent-1-soft: oklch(0.7 0.22 350 / 0.18);
-  --accent-2-soft: oklch(0.78 0.18 60 / 0.18);
+  --accent-1: #ff85b8;
+  --accent-2: #ffb273;
+  --accent-1-soft: rgba(255,133,184,0.18);
+  --accent-2-soft: rgba(255,178,115,0.18);
   --font-display: "Space Grotesk", system-ui, sans-serif;
   --font-body: "IBM Plex Sans", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
@@ -43,28 +41,25 @@ html,body {
   -webkit-font-smoothing: antialiased;
 }
 body { overflow-x: hidden; }
-body.compact section { padding-top: calc(var(--section-y) * 0.7); }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 ::selection { background: var(--accent-2-soft); color: var(--fg); }
 
-/* Cursor glow */
 .cursor-glow {
   position: fixed; pointer-events: none; z-index: 1;
   width: 520px; height: 520px; border-radius: 50%;
   background: radial-gradient(circle, var(--accent-1-soft), transparent 60%);
   filter: blur(40px);
   transform: translate(-50%,-50%);
-  opacity: 0; transition: opacity .3s;
+  opacity: 0.7;
   mix-blend-mode: screen;
+  transition: left .08s linear, top .08s linear;
 }
-body.has-glow .cursor-glow { opacity: 0.7; }
 
-/* Layout */
 .container { max-width: var(--maxw); margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); position: relative; z-index: 2; }
 section { padding-top: var(--section-y); padding-bottom: 20px; position: relative; }
+section.compact { padding-top: calc(var(--section-y) * 0.7); }
 
-/* Eyebrow */
 .eyebrow {
   font-family: var(--font-mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
   color: var(--fg-mute); display: flex; align-items: center; gap: 14px; margin-bottom: 24px;
@@ -75,11 +70,11 @@ section { padding-top: var(--section-y); padding-bottom: 20px; position: relativ
 .section-sub { color:var(--fg-dim); max-width:64ch; font-size:17px; }
 
 /* Nav */
-.nav { position:fixed; top:0; left:0; right:0; z-index:50; backdrop-filter:blur(12px); background:linear-gradient(to bottom,rgba(6,6,12,.85),rgba(6,6,12,.55)); border-bottom:1px solid transparent; transition:border-color .3s,background .3s; }
+.nav { position:fixed; top:0; left:0; right:0; z-index:50; backdrop-filter:blur(12px); background:linear-gradient(to bottom,rgba(6,6,12,.85),rgba(6,6,12,.55)); border-bottom:1px solid transparent; transition:border-color .3s; }
 .nav.scrolled { border-bottom-color:var(--line); }
 .nav-inner { max-width:var(--maxw); margin:0 auto; padding:14px var(--pad); display:flex; align-items:center; justify-content:space-between; gap:20px; }
 .brand { display:flex; align-items:center; gap:10px; font-family:var(--font-mono); font-size:13px; letter-spacing:.04em; }
-.brand-dot { width:10px; height:10px; border-radius:50%; background:var(--accent-1); box-shadow:0 0 12px var(--accent-1),0 0 24px var(--accent-1-soft); animation:pulse 2.4s ease-in-out infinite; }
+.brand-dot { width:10px; height:10px; border-radius:50%; background:var(--accent-1); box-shadow:0 0 12px var(--accent-1); animation:pulse 2.4s ease-in-out infinite; }
 @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.25);opacity:.65} }
 .nav-links { display:flex; gap:4px; font-family:var(--font-mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--fg-dim); }
 .nav-links a { padding:8px 12px; border-radius:8px; transition:color .15s,background .15s; }
@@ -96,7 +91,7 @@ section { padding-top: var(--section-y); padding-bottom: 20px; position: relativ
 .hero-inner { position:relative; z-index:3; width:100%; max-width:var(--maxw); padding:0 var(--pad); display:grid; grid-template-columns:1fr; gap:36px; text-align:left; }
 .status-pill { display:inline-flex; align-items:center; gap:10px; padding:8px 14px 8px 12px; border-radius:999px; border:1px solid var(--line-strong); background:rgba(255,255,255,.025); font-family:var(--font-mono); font-size:12px; letter-spacing:.05em; color:var(--fg-dim); width:fit-content; }
 .status-pill .dot { width:8px; height:8px; border-radius:50%; background:#4ade80; box-shadow:0 0 10px #4ade80; animation:pulse 2s ease-in-out infinite; }
-.hero-name { font-family:var(--font-display); font-weight:500; font-size:clamp(64px,11vw,168px); line-height:.92; letter-spacing:-.04em; margin:8px 0 4px; text-wrap:balance; }
+.hero-name { font-family:var(--font-display); font-weight:500; font-size:clamp(64px,11vw,168px); line-height:.92; letter-spacing:-.04em; margin:8px 0 4px; }
 .hero-name .last { background:linear-gradient(135deg,var(--accent-1) 0%,var(--accent-2) 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
 .hero-role { font-family:var(--font-mono); font-size:clamp(13px,1.2vw,15px); letter-spacing:.18em; text-transform:uppercase; color:var(--fg-dim); display:flex; flex-wrap:wrap; gap:8px 14px; margin-top:8px; }
 .hero-role .sep { color:var(--accent-1); }
@@ -106,10 +101,9 @@ section { padding-top: var(--section-y); padding-bottom: 20px; position: relativ
 .hero-tagline em { font-style:normal; color:var(--accent-1); }
 .hero-side { display:flex; flex-direction:column; gap:16px; color:var(--fg-dim); font-size:15px; max-width:38ch; }
 .hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:8px; }
-.btn { display:inline-flex; align-items:center; gap:10px; padding:14px 22px; border-radius:999px; border:1px solid var(--line-strong); font-family:var(--font-mono); font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--fg); background:rgba(255,255,255,.02); transition:transform .2s,border-color .2s,background .2s,color .2s; }
+.btn { display:inline-flex; align-items:center; gap:10px; padding:14px 22px; border-radius:999px; border:1px solid var(--line-strong); font-family:var(--font-mono); font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--fg); background:rgba(255,255,255,.02); transition:transform .2s,border-color .2s; }
 .btn:hover { border-color:var(--accent-1); }
 .btn-primary { background:linear-gradient(135deg,var(--accent-1) 0%,var(--accent-2) 100%); border-color:transparent; color:#06060c; font-weight:600; }
-.btn-primary:hover { color:#06060c; }
 .btn .arrow { transition:transform .25s; display:inline-flex; }
 .btn:hover .arrow { transform:translateX(3px); }
 .hero-meta { display:grid; grid-template-columns:repeat(4,1fr); gap:28px; margin-top:70px; border-top:1px solid var(--line); padding-top:28px; }
@@ -117,6 +111,8 @@ section { padding-top: var(--section-y); padding-bottom: 20px; position: relativ
 .meta-item .k { font-family:var(--font-display); font-size:clamp(28px,3vw,38px); font-weight:500; letter-spacing:-.02em; color:var(--fg); display:flex; align-items:baseline; gap:6px; }
 .meta-item .k .accent { color:var(--accent-1); font-size:.7em; }
 .meta-item .v { font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.12em; color:var(--fg-mute); margin-top:6px; }
+.cursor-block { display:inline-block; width:.5ch; background:var(--accent-1); height:.9em; vertical-align:middle; margin-left:2px; animation:blink .7s step-end infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
 /* About */
 .about-grid { display:grid; grid-template-columns:1.4fr 1fr; gap:64px; align-items:start; }
@@ -207,16 +203,15 @@ section { padding-top: var(--section-y); padding-bottom: 20px; position: relativ
 .footer { border-top:1px solid var(--line); padding:36px var(--pad); display:flex; justify-content:space-between; align-items:center; gap:20px; max-width:var(--maxw); margin:60px auto 0; font-family:var(--font-mono); font-size:12px; color:var(--fg-mute); letter-spacing:.06em; }
 @media(max-width:600px){ .footer{flex-direction:column;align-items:flex-start;} }
 
-/* Scroll reveal — hidden until JS adds .reveal-ready (after preloader) */
-.reveal { opacity:1; transform:none; }
-.reveal-ready { opacity:0; transform:translateY(28px); transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1); transition-delay:var(--d,0ms); }
-.reveal-ready.in { opacity:1; transform:translateY(0); }
+/* Scroll reveal */
+.reveal { opacity:0; transform:translateY(28px); transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1); transition-delay:var(--d,0ms); }
+.reveal.in { opacity:1; transform:none; }
 
 /* Matrix overlay */
 .matrix-overlay { position:fixed; inset:0; background:#000; z-index:100; pointer-events:none; opacity:0; transition:opacity .4s; }
 .matrix-overlay.show { opacity:1; pointer-events:auto; }
 .matrix-overlay canvas { width:100%; height:100%; display:block; }
-.matrix-hint { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); font-family:var(--font-mono); font-size:12px; color:var(--accent-1); letter-spacing:.2em; text-transform:uppercase; z-index:101; }
+.matrix-hint { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); font-family:var(--font-mono); font-size:12px; color:var(--accent-1); letter-spacing:.2em; text-transform:uppercase; z-index:101; pointer-events:none; }
 
 /* Toast */
 .toast { position:fixed; top:86px; left:50%; transform:translateX(-50%) translateY(-20px); z-index:200; padding:14px 18px; border:1px solid var(--accent-1); background:rgba(6,6,12,.92); font-family:var(--font-mono); font-size:12px; letter-spacing:.06em; color:var(--accent-1); border-radius:8px; opacity:0; transition:opacity .3s,transform .3s; pointer-events:none; }
@@ -230,244 +225,183 @@ section { padding-top: var(--section-y); padding-bottom: 20px; position: relativ
 @media(max-width:600px){ .egg-btn{font-size:10px;padding:8px 12px;bottom:14px;left:14px;} }
 </style>
 </head>
-<body class="compact has-glow">
+<body>
 
-<!-- Preloader: shows immediately, hides once React renders -->
-<div id="preloader" style="
-  position:fixed;inset:0;background:#06060c;z-index:9999;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
-  transition:opacity 0.5s ease;
-">
-  <div style="
-    width:48px;height:48px;border-radius:50%;
-    border:2px solid rgba(255,133,184,0.15);
-    border-top-color:#ff85b8;
-    animation:__spin 0.8s linear infinite;
-  "></div>
-  <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;color:#6b6b80;text-transform:uppercase;">loading</span>
+<!-- Cursor glow -->
+<div class="cursor-glow" id="cursor-glow"></div>
+
+<!-- Nav -->
+<nav class="nav" id="main-nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <span class="brand-dot"></span>
+      <span>TK · tanmay-kolte</span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="#about" data-section="about">About</a>
+      <a href="#skills" data-section="skills">Stack</a>
+      <a href="#work" data-section="work">Work</a>
+      <a href="#experience" data-section="experience">Experience</a>
+      <a href="#education" data-section="education">Education</a>
+    </div>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section id="top" class="hero">
+  <canvas class="hero-canvas" id="hero-canvas"></canvas>
+  <div class="hero-vignette"></div>
+  <div class="hero-inner">
+    <div class="status-pill">
+      <span class="dot"></span>
+      <span>Available for AI / ML &amp; Data roles · 2026 grad</span>
+    </div>
+    <h1 class="hero-name">
+      <span id="scramble-first">TANMAY</span>&nbsp;<span class="last" id="scramble-last">KOLTE</span>
+    </h1>
+    <div class="hero-role">
+      <span>AI / ML Engineer</span><span class="sep">/</span>
+      <span>Generative AI</span><span class="sep">/</span>
+      <span>Data Science</span><span class="sep">/</span>
+      <span>Edge &amp; Embedded</span>
+    </div>
+    <div class="hero-grid">
+      <div class="hero-tagline" id="typewriter-text">
+        <span id="typewriter-content"></span><span class="cursor-block" id="typewriter-cursor"></span>
+      </div>
+      <div class="hero-side">
+        <p>Final-year ECE engineer with hands-on experience shipping end-to-end ML, RAG pipelines, and production SaaS. IIT Guwahati E&amp;ICT certified.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#work"><span>See my work</span><span class="arrow">→</span></a>
+          <a class="btn" href="#contact"><span>Get in touch</span><span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-meta">
+      <div class="meta-item"><div class="k">5<span class="accent">+</span></div><div class="v">Shipped projects</div></div>
+      <div class="meta-item"><div class="k">91.4<span class="accent">%</span></div><div class="v">Edge-AI accuracy</div></div>
+      <div class="meta-item"><div class="k">100<span class="accent">Hz</span></div><div class="v">Real-time DAQ</div></div>
+      <div class="meta-item"><div class="k">70<span class="accent">%</span></div><div class="v">Workload cut (Aeron)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="container">
+    <div class="eyebrow"><span class="num">01 /</span><span>About</span></div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <h2 class="section-title">Final-year ECE engineer building <em style="color:var(--accent-1);font-style:normal">data-driven, hardware-aware AI systems</em>.</h2>
+        <p>I'm a certified AI/ML practitioner (<strong>IIT Guwahati E&amp;ICT Academy</strong>) with shipping experience across the full stack — from sensor data acquisition on STM32, to RAG-based LLM pipelines, to multi-tenant production SaaS.</p>
+        <p>I've delivered end-to-end data products for real clients in <strong>marketing analytics</strong> and <strong>renewable energy</strong>, and my embedded background gives me a hardware-to-model perspective most ML engineers don't have.</p>
+        <p class="mono-callout">// currently building Edge AI for solar irradiance forecasting &amp; an autonomous FPV drone with onboard YOLOv8.</p>
+      </div>
+      <div class="about-card reveal" style="--d:120ms">
+        <div class="about-card-label">// quick_facts.json</div>
+        <ul class="about-list">
+          <li><span class="label">Location</span><span class="value">Pune, India</span></li>
+          <li><span class="label">Status</span><span class="value">Open to roles</span></li>
+          <li><span class="label">Degree</span><span class="value">B.E. ECE (IoT) · 2026</span></li>
+          <li><span class="label">CGPA</span><span class="value">8.1 / 10</span></li>
+          <li><span class="label">Languages</span><span class="value">EN · HI · MR</span></li>
+          <li><span class="label">Outside work</span><span class="value">Football · FPV · Chess</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <div class="container">
+    <div class="eyebrow"><span class="num">02 /</span><span>Stack</span></div>
+    <h2 class="section-title reveal">A toolkit spanning silicon to LLMs.</h2>
+    <p class="section-sub reveal" style="--d:80ms;margin-bottom:44px">Comfort across the whole data path — sensors, pipelines, models, serving, and the dashboards on top.</p>
+    <div class="skills-grid" id="skills-grid"></div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="work">
+  <div class="container">
+    <div class="eyebrow"><span class="num">03 /</span><span>Featured work</span></div>
+    <h2 class="section-title reveal">Shipped, measurable, end-to-end.</h2>
+    <p class="section-sub reveal" style="--d:80ms;margin-bottom:44px">A selection of projects across edge AI, full-stack SaaS, embedded systems, and data science.</p>
+    <div class="projects-grid" id="projects-grid"></div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience">
+  <div class="container">
+    <div class="eyebrow"><span class="num">04 /</span><span>Experience</span></div>
+    <h2 class="section-title reveal">Where I've been useful.</h2>
+    <p class="section-sub reveal" style="--d:80ms;margin-bottom:44px">From a Formula Student racing team to internal SaaS for a hardware company.</p>
+    <div class="timeline" id="timeline"></div>
+  </div>
+</section>
+
+<!-- Education -->
+<section id="education">
+  <div class="container">
+    <div class="eyebrow"><span class="num">05 /</span><span>Education &amp; Credentials</span></div>
+    <h2 class="section-title reveal">Foundations.</h2>
+    <p class="section-sub reveal" style="--d:80ms;margin-bottom:44px">Engineering degree in progress, plus deep dives into AI/ML and silicon design.</p>
+    <div class="two-col">
+      <div class="reveal">
+        <div class="about-card-label" style="margin-bottom:18px">// degrees</div>
+        <div class="edu-list" id="edu-list"></div>
+      </div>
+      <div class="reveal" style="--d:100ms">
+        <div class="about-card-label" style="margin-bottom:18px">// certifications</div>
+        <div class="cert-list" id="cert-list"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="contact-section">
+  <div class="container">
+    <div class="eyebrow"><span class="num">06 /</span><span>Get in touch</span></div>
+    <div class="contact-card reveal">
+      <h2>Let's build something that <em>ships</em>.</h2>
+      <p>Open to AI/ML engineering, data science, and full-stack roles. Always up to talk edge AI, robotics, or interesting datasets.</p>
+      <div class="contact-links">
+        <a href="mailto:koltetanmay7@gmail.com">koltetanmay7@gmail.com</a>
+        <a href="https://linkedin.com/in/tanmay-kolte" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="tel:+919561272391">+91 95612 72391</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div>© 2026 · Tanmay Kolte · Pune, IN</div>
+  <div>Crafted with code · <span style="color:var(--accent-1)">try typing</span> <code style="background:rgba(255,255,255,.05);padding:2px 6px;border-radius:4px">ml</code></div>
+</footer>
+
+<!-- Matrix overlay -->
+<div class="matrix-overlay" id="matrix-overlay">
+  <canvas id="matrix-canvas"></canvas>
+  <div class="matrix-hint">// model.train() · esc to exit</div>
 </div>
-<style>@keyframes __spin{to{transform:rotate(360deg)}}</style>
 
-<div id="root"></div>
+<!-- Toast -->
+<div class="toast" id="toast"></div>
 
-<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin></script>
+<!-- Easter-egg hint -->
+<button class="egg-btn" id="egg-btn" title="Try typing 'ml' anywhere, or click for a surprise">
+  <span class="egg-dot"></span>
+  <span>type</span>
+  <span class="egg-key">ml</span>
+  <span style="color:var(--fg-mute)">/ click</span>
+</button>
 
-<script type="text/babel">
-const { useEffect, useRef, useState } = React;
-
-/* ── PALETTE (locked: magenta / orange) ── */
-const ACCENT = { hex1: "#ff85b8", hex2: "#ffb273" };
-
-/* ── HERO CANVAS ── */
-function HeroCanvas() {
-  const ref = useRef(null);
-  useEffect(() => {
-    const canvas = ref.current; if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    let raf, w, h, dpr;
-    let mouse = { x: -9999, y: -9999 };
-    const resize = () => {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = window.innerWidth; h = window.innerHeight;
-      canvas.width = w * dpr; canvas.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
-    resize();
-    window.addEventListener("resize", resize);
-    window.addEventListener("mousemove", (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
-    const NODES = Math.min(80, Math.floor((w * h) / 18000));
-    const nodes = Array.from({ length: NODES }, () => ({
-      x: Math.random() * w, y: Math.random() * h,
-      vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .25,
-      r: Math.random() * 1.4 + .4,
-    }));
-    const loop = () => {
-      ctx.clearRect(0, 0, w, h);
-      for (let i = 0; i < nodes.length; i++) {
-        const a = nodes[i];
-        a.x += a.vx; a.y += a.vy;
-        if (a.x < 0 || a.x > w) a.vx *= -1;
-        if (a.y < 0 || a.y > h) a.vy *= -1;
-        const mdx = a.x - mouse.x, mdy = a.y - mouse.y, md = Math.hypot(mdx, mdy);
-        if (md < 140) { a.x += (mdx / md) * .8; a.y += (mdy / md) * .8; }
-        for (let j = i + 1; j < nodes.length; j++) {
-          const b = nodes[j];
-          const d = Math.hypot(a.x - b.x, a.y - b.y);
-          if (d < 160) {
-            const alpha = (1 - d / 160) * .45;
-            const grad = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
-            grad.addColorStop(0, ACCENT.hex1); grad.addColorStop(1, ACCENT.hex2);
-            ctx.strokeStyle = grad; ctx.globalAlpha = alpha; ctx.lineWidth = .6;
-            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-          }
-        }
-      }
-      ctx.globalAlpha = 1;
-      for (const n of nodes) {
-        ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = ACCENT.hex1; ctx.fill();
-      }
-      raf = requestAnimationFrame(loop);
-    };
-    loop();
-    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", resize); };
-  }, []);
-  return <canvas ref={ref} className="hero-canvas" />;
-}
-
-/* ── SCRAMBLE HOOK ── */
-function useScramble(target, { duration = 1400, chars = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&*<>/{}[]" } = {}) {
-  const [out, setOut] = useState("");
-  useEffect(() => {
-    let raf;
-    const start = performance.now();
-    const len = target.length;
-    const loop = (t) => {
-      const elapsed = t - start;
-      const progress = Math.min(1, elapsed / duration);
-      let s = "";
-      for (let i = 0; i < len; i++) {
-        const cp = Math.min(1, Math.max(0, (progress - i / len * .6) * 2.5));
-        if (target[i] === " ") { s += " "; continue; }
-        if (cp >= 1) s += target[i];
-        else s += chars[Math.floor(Math.random() * chars.length)];
-      }
-      setOut(s);
-      if (progress < 1) raf = requestAnimationFrame(loop);
-      else setOut(target);
-    };
-    raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
-  }, [target]);
-  return out;
-}
-
-/* ── TYPEWRITER HOOK ── */
-function useTypewriter(text, delay = 0, speed = 26) {
-  const [out, setOut] = useState("");
-  useEffect(() => {
-    setOut(""); let i = 0;
-    const id1 = setTimeout(() => {
-      const id = setInterval(() => {
-        i++; setOut(text.slice(0, i));
-        if (i >= text.length) clearInterval(id);
-      }, speed);
-    }, delay);
-    return () => clearTimeout(id1);
-  }, [text]);
-  return out;
-}
-
-/* ── NAV ── */
-function Nav({ active }) {
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 20);
-    fn(); window.addEventListener("scroll", fn, { passive: true });
-    return () => window.removeEventListener("scroll", fn);
-  }, []);
-  return (
-    <nav className={"nav " + (scrolled ? "scrolled" : "")}>
-      <div className="nav-inner">
-        <a href="#top" className="brand">
-          <span className="brand-dot" />
-          <span>TK · tanmay-kolte</span>
-        </a>
-        <div className="nav-links">
-          {[["#about","about","About"],["#skills","skills","Stack"],["#work","work","Work"],["#experience","experience","Experience"],["#education","education","Education"]].map(([href,id,label]) => (
-            <a key={id} href={href} className={active === id ? "active" : ""}>{label}</a>
-          ))}
-        </div>
-        <a href="#contact" className="nav-cta">Get in touch</a>
-      </div>
-    </nav>
-  );
-}
-
-/* ── EYEBROW ── */
-function Eyebrow({ num, children }) {
-  return <div className="eyebrow"><span className="num">{num}</span><span>{children}</span></div>;
-}
-
-/* ── HERO ── */
-function Hero() {
-  const firstName = useScramble("TANMAY", { duration: 900 });
-  const lastName  = useScramble("KOLTE",  { duration: 1400 });
-  const tagline   = useTypewriter("Building data-driven, hardware-aware AI systems — from sensors to LLMs.", 1500, 22);
-  const done = tagline.length === 76;
-  return (
-    <section id="top" className="hero">
-      <HeroCanvas />
-      <div className="hero-vignette" />
-      <div className="hero-inner">
-        <div className="status-pill reveal in">
-          <span className="dot" />
-          <span>Available for AI / ML &amp; Data roles · 2026 grad</span>
-        </div>
-        <h1 className="hero-name">
-          <span>{firstName}</span>{" "}<span className="last">{lastName}</span>
-        </h1>
-        <div className="hero-role">
-          <span>AI / ML Engineer</span><span className="sep">/</span>
-          <span>Generative AI</span><span className="sep">/</span>
-          <span>Data Science</span><span className="sep">/</span>
-          <span>Edge &amp; Embedded</span>
-        </div>
-        <div className="hero-grid">
-          <div className="hero-tagline">
-            {tagline}<span style={{ opacity: done ? 0 : 1 }}>▌</span>
-          </div>
-          <div className="hero-side">
-            <p style={{ margin: 0 }}>Final-year ECE engineer with hands-on experience shipping end-to-end ML, RAG pipelines, and production SaaS. IIT Guwahati E&amp;ICT certified.</p>
-            <div className="hero-actions">
-              <a className="btn btn-primary" href="#work"><span>See my work</span><span className="arrow">→</span></a>
-              <a className="btn" href="#contact"><span>Get in touch</span><span className="arrow">→</span></a>
-            </div>
-          </div>
-        </div>
-        <div className="hero-meta">
-          {[["5","+","Shipped projects"],["91.4","%","Edge-AI accuracy"],["100","Hz","Real-time DAQ"],["70","%","Workload cut (Aeron)"]].map(([k,s,v]) => (
-            <div className="meta-item" key={v}>
-              <div className="k">{k}<span className="accent">{s}</span></div>
-              <div className="v">{v}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ── ABOUT ── */
-function About() {
-  return (
-    <section id="about">
-      <div className="container">
-        <Eyebrow num="01 /">About</Eyebrow>
-        <div className="about-grid">
-          <div className="about-text reveal">
-            <h2 className="section-title">Final-year ECE engineer building <em style={{ color:"var(--accent-1)",fontStyle:"normal" }}>data-driven, hardware-aware AI systems</em>.</h2>
-            <p>I'm a certified AI/ML practitioner (<strong>IIT Guwahati E&amp;ICT Academy</strong>) with shipping experience across the full stack — from sensor data acquisition on STM32, to RAG-based LLM pipelines, to multi-tenant production SaaS.</p>
-            <p>I've delivered end-to-end data products for real clients in <strong>marketing analytics</strong> and <strong>renewable energy</strong>, and my embedded background gives me a hardware-to-model perspective most ML engineers don't have.</p>
-            <p className="mono-callout">// currently building Edge AI for solar irradiance forecasting &amp; an autonomous FPV drone with onboard YOLOv8.</p>
-          </div>
-          <div className="about-card reveal" style={{ "--d":"120ms" }}>
-            <div className="about-card-label">// quick_facts.json</div>
-            <ul className="about-list">
-              {[["Location","Pune, India"],["Status","Open to roles"],["Degree","B.E. ECE (IoT) · 2026"],["CGPA","8.1 / 10"],["Languages","EN · HI · MR"],["Outside work","Football · FPV · Chess"]].map(([l,v]) => (
-                <li key={l}><span className="label">{l}</span><span className="value">{v}</span></li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ── SKILLS ── */
+<script>
+/* ── DATA ── */
 const SKILL_GROUPS = [
   { title:"Generative AI & LLMs", items:["LangChain","RAG Pipelines","Prompt Engineering","OpenAI API","FAISS / Vector Stores","LLM Fine-tuning"] },
   { title:"Machine Learning", items:["Supervised Learning","EDA & Feature Engineering","Hypothesis Testing","Time Series","Computer Vision","TensorFlow","PyTorch"] },
@@ -476,107 +410,45 @@ const SKILL_GROUPS = [
   { title:"Embedded / IoT Edge", items:["STM32","ESP32","Raspberry Pi","CAN Bus","MQTT","Sensor Fusion","Real-time DAQ"] },
   { title:"Tools", items:["VS Code","Linux","Jupyter","Postman","OpenCV","TensorFlow Lite","Betaflight"] },
 ];
-function Skills() {
-  return (
-    <section id="skills">
-      <div className="container">
-        <Eyebrow num="02 /">Stack</Eyebrow>
-        <h2 className="section-title reveal">A toolkit spanning silicon to LLMs.</h2>
-        <p className="section-sub reveal" style={{ "--d":"80ms",marginBottom:44 }}>Comfort across the whole data path — sensors, pipelines, models, serving, and the dashboards on top.</p>
-        <div className="skills-grid">
-          {SKILL_GROUPS.map((g,i) => (
-            <div className="skill-block reveal" key={g.title} style={{ "--d":`${i*80}ms` }}>
-              <div className="skill-head">
-                <span className="idx">{String(i+1).padStart(2,"0")}</span>
-                <h3>{g.title}</h3>
-              </div>
-              <div className="chips">{g.items.map(it => <span className="chip" key={it}>{it}</span>)}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
-/* ── PROJECTS ── */
 const PROJECTS = [
   {
     tag:"Edge AI · Renewable Energy",
     title:"Cloud Detection & Irradiance Forecasting for Solar Plants",
     stats:[{k:"91.4%",v:"5-class accuracy"},{k:"8.2",v:"W/m² MAE · R² 0.94"},{k:"< 1.6s",v:"end-to-end latency"}],
-    desc:<>Designed and shipped a complete <strong>Edge AI pipeline on Raspberry Pi 4B</strong> for real-time sky-cloud classification and 5–15 min ahead solar irradiance forecasting. INT8-quantized MobileNetV2 + OpenCV RBR-segmentation + multi-sensor fusion (DHT22, BMP280, TSL2591), with MQTT-QoS-1 telemetry and a Flask operator dashboard.</>,
+    desc:"Designed and shipped a complete <strong>Edge AI pipeline on Raspberry Pi 4B</strong> for real-time sky-cloud classification and 5–15 min ahead solar irradiance forecasting. INT8-quantized MobileNetV2 + OpenCV RBR-segmentation + multi-sensor fusion (DHT22, BMP280, TSL2591), with MQTT-QoS-1 telemetry and a Flask operator dashboard.",
     stack:["Python","TensorFlow Lite","MobileNetV2","OpenCV","MQTT","SQLite","Flask","Raspberry Pi"],
   },
   {
     tag:"Full-Stack · Internal SaaS",
     title:"Circuit Cloud — Component Library Platform",
     stats:[{k:"70%",v:"team workload reduction"},{k:"500+",v:"parts catalogued"},{k:"20%",v:"design-cycle speedup"}],
-    desc:<>Sole-developer build of a production <strong>internal SaaS</strong> for Aeron Systems' hardware team. Browser-based access to 500+ components replaced manual spreadsheets, cut team workload by 70%, and standardized part selection across three engineering teams.</>,
+    desc:"Sole-developer build of a production <strong>internal SaaS</strong> for Aeron Systems' hardware team. Browser-based access to 500+ components replaced manual spreadsheets, cut team workload by 70%, and standardized part selection across three engineering teams.",
     stack:["React","Node.js","Express","PostgreSQL","Prisma","Docker","REST"],
   },
   {
     tag:"Computer Vision · Robotics",
     title:"FPV Surveillance Drone with Onboard YOLOv8",
     stats:[{k:"30+",v:"FPS onboard inference"},{k:"YOLOv8",v:"real-time detection"},{k:"IMU",v:"sensor fusion"}],
-    desc:<>Building a first-person-view surveillance platform with an onboard CV pipeline for real-time object detection. Flight-controller tuning, IMU sensor fusion, and a <strong>30+ FPS YOLOv8</strong> inference loop on a companion compute board with an OpenCV pre-processing stage for stabilization and ROI extraction.</>,
+    desc:"Building a first-person-view surveillance platform with an onboard CV pipeline for real-time object detection. Flight-controller tuning, IMU sensor fusion, and a <strong>30+ FPS YOLOv8</strong> inference loop on a companion compute board with an OpenCV pre-processing stage for stabilization and ROI extraction.",
     stack:["Python","YOLOv8","OpenCV","TFLite","Betaflight","IMU"],
   },
   {
     tag:"Data Science · Client Project",
     title:"Marketing EDA & Hypothesis Testing",
     stats:[{k:"ANOVA",v:"+ t-test + χ²"},{k:"EDA",v:"end-to-end"},{k:"Client",v:"shipped"}],
-    desc:<>Comprehensive EDA on a marketing agency's campaign dataset — identifying high-performing audience segments and channel ROI drivers. Applied <strong>t-tests, chi-square, and ANOVA</strong> to validate assumptions, delivered actionable insights via Seaborn visualizations and a structured report.</>,
+    desc:"Comprehensive EDA on a marketing agency's campaign dataset — identifying high-performing audience segments and channel ROI drivers. Applied <strong>t-tests, chi-square, and ANOVA</strong> to validate assumptions, delivered actionable insights via Seaborn visualizations and a structured report.",
     stack:["Python","Pandas","NumPy","SciPy","Matplotlib","Seaborn"],
   },
   {
     tag:"Embedded · Formula Student",
     title:"Telemetry Pipeline for Formula Student EV",
     stats:[{k:"100 Hz",v:"multi-channel DAQ"},{k:"600V",v:"HV system"},{k:"Lead",v:"of 4 engineers"}],
-    desc:<>Engineered a <strong>100 Hz real-time telemetry pipeline on STM32</strong> for the Accelerator Pedal Position Sensor System, streaming multi-channel sensor data over CAN bus. Led a 4-engineer team through 10 months of system design, calibration, and integration of HV (600V) + LV (12V) domains. Designed the safety-critical BSPD analog circuit.</>,
+    desc:"Engineered a <strong>100 Hz real-time telemetry pipeline on STM32</strong> for the Accelerator Pedal Position Sensor System, streaming multi-channel sensor data over CAN bus. Led a 4-engineer team through 10 months of system design, calibration, and integration of HV (600V) + LV (12V) domains. Designed the safety-critical BSPD analog circuit.",
     stack:["STM32","CAN Bus","Embedded C","ADC","GPIO"],
   },
 ];
 
-function ProjectCard({ p, i }) {
-  const ref = useRef(null);
-  const onMove = (e) => {
-    const el = ref.current; if (!el) return;
-    const r = el.getBoundingClientRect();
-    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
-    el.style.setProperty("--my", `${e.clientY - r.top}px`);
-  };
-  return (
-    <div className="project-card reveal" ref={ref} onMouseMove={onMove} style={{ "--d":`${i*60}ms` }}>
-      <div className="project-meta">
-        <div className="project-tag"><span className="dash">—</span> {p.tag}</div>
-        <h3 className="project-title">{p.title}</h3>
-        <div className="project-stat-row">
-          {p.stats.map(s => <div className="project-stat" key={s.v}><div className="k">{s.k}</div><div className="v">{s.v}</div></div>)}
-        </div>
-      </div>
-      <div className="project-body">
-        <p className="project-desc">{p.desc}</p>
-        <div className="project-stack">{p.stack.map(s => <span className="stack-tag" key={s}>{s}</span>)}</div>
-      </div>
-    </div>
-  );
-}
-
-function Projects() {
-  return (
-    <section id="work">
-      <div className="container">
-        <Eyebrow num="03 /">Featured work</Eyebrow>
-        <h2 className="section-title reveal">Shipped, measurable, end-to-end.</h2>
-        <p className="section-sub reveal" style={{ "--d":"80ms",marginBottom:44 }}>A selection of projects across edge AI, full-stack SaaS, embedded systems, and data science.</p>
-        <div className="projects-grid">{PROJECTS.map((p,i) => <ProjectCard p={p} i={i} key={p.title} />)}</div>
-      </div>
-    </section>
-  );
-}
-
-/* ── EXPERIENCE ── */
 const EXPERIENCE = [
   {
     date:"Sep 2025 — Mar 2026", role:"Hardware Design Team Intern", org:"Aeron Systems · Pune",
@@ -595,259 +467,297 @@ const EXPERIENCE = [
   },
 ];
 
-function Experience() {
-  return (
-    <section id="experience">
-      <div className="container">
-        <Eyebrow num="04 /">Experience</Eyebrow>
-        <h2 className="section-title reveal">Where I've been useful.</h2>
-        <p className="section-sub reveal" style={{ "--d":"80ms",marginBottom:44 }}>From a Formula Student racing team to internal SaaS for a hardware company.</p>
-        <div className="timeline">
-          {EXPERIENCE.map((e,i) => (
-            <div className="timeline-item reveal" key={e.role} style={{ "--d":`${i*100}ms` }}>
-              <div className="timeline-date">{e.date}</div>
-              <h3 className="timeline-role">{e.role}</h3>
-              <div className="timeline-org">{e.org}</div>
-              <p className="timeline-desc">{e.desc}</p>
-              <div className="timeline-stack">{e.stack.map(s => <span className="stack-tag" key={s}>{s}</span>)}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ── EDUCATION & CERTS ── */
 const EDUCATION = [
   { deg:"B.E. (Hons.) Electronics & Telecommunication — IoT", org:"NBN Sinhgad School of Engineering, Pune · SPPU", period:"2022 — 2026", grade:"CGPA 8.1 / 10" },
   { deg:"Higher Secondary (12th Science)", org:"MIT Junior College, Pune", period:"2021 — 2022", grade:"72.83%" },
   { deg:"Secondary (10th)", org:"Aaryans World School, Pune", period:"2019 — 2020", grade:"84.6%" },
 ];
+
 const CERTS = [
   { name:"Professional Certification in AI and Machine Learning", org:"IIT Guwahati — E&ICT Academy", date:"Jun 2025 — Mar 2026" },
   { name:"VLSI SoC Design (Verilog HDL)", org:"Maven Silicon", date:"May — Jun 2025" },
   { name:"Electric Systems Officer Level 3E (HV Qualified Person)", org:"Skillshark India", date:"May — Jun 2025" },
 ];
 
-function EducationCerts() {
-  return (
-    <section id="education">
-      <div className="container">
-        <Eyebrow num="05 /">Education &amp; Credentials</Eyebrow>
-        <h2 className="section-title reveal">Foundations.</h2>
-        <p className="section-sub reveal" style={{ "--d":"80ms",marginBottom:44 }}>Engineering degree in progress, plus deep dives into AI/ML and silicon design.</p>
-        <div className="two-col">
-          <div className="reveal">
-            <div className="about-card-label" style={{ marginBottom:18 }}>// degrees</div>
-            <div className="edu-list">
-              {EDUCATION.map(e => (
-                <div className="edu-card" key={e.deg}>
-                  <h3>{e.deg}</h3>
-                  <div className="org">{e.org}</div>
-                  <div className="meta"><span>{e.period}</span><span>{e.grade}</span></div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="reveal" style={{ "--d":"100ms" }}>
-            <div className="about-card-label" style={{ marginBottom:18 }}>// certifications</div>
-            <div className="cert-list">
-              {CERTS.map(c => (
-                <div className="cert-row" key={c.name}>
-                  <div className="cert-name">{c.name}<span>{c.org}</span></div>
-                  <div className="cert-date">{c.date}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+/* ── RENDER DYNAMIC CONTENT ── */
+(function renderContent() {
+  // Skills
+  const sg = document.getElementById("skills-grid");
+  SKILL_GROUPS.forEach((g, i) => {
+    const d = document.createElement("div");
+    d.className = "skill-block reveal";
+    d.style.cssText = `--d:${i*80}ms`;
+    d.innerHTML = `<div class="skill-head"><span class="idx">${String(i+1).padStart(2,"0")}</span><h3>${g.title}</h3></div><div class="chips">${g.items.map(it=>`<span class="chip">${it}</span>`).join("")}</div>`;
+    sg.appendChild(d);
+  });
 
-/* ── CONTACT ── */
-function Contact() {
-  return (
-    <section id="contact" className="contact-section">
-      <div className="container">
-        <Eyebrow num="06 /">Get in touch</Eyebrow>
-        <div className="contact-card reveal">
-          <h2>Let's build something that <em>ships</em>.</h2>
-          <p>Open to AI/ML engineering, data science, and full-stack roles. Always up to talk edge AI, robotics, or interesting datasets.</p>
-          <div className="contact-links">
-            <a href="mailto:koltetanmay7@gmail.com">koltetanmay7@gmail.com</a>
-            <a href="https://linkedin.com/in/tanmay-kolte" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href="tel:+919561272391">+91 95612 72391</a>
-          </div>
-        </div>
+  // Projects
+  const pg = document.getElementById("projects-grid");
+  PROJECTS.forEach((p, i) => {
+    const d = document.createElement("div");
+    d.className = "project-card reveal";
+    d.style.cssText = `--d:${i*60}ms`;
+    d.addEventListener("mousemove", (e) => {
+      const r = d.getBoundingClientRect();
+      d.style.setProperty("--mx", `${e.clientX - r.left}px`);
+      d.style.setProperty("--my", `${e.clientY - r.top}px`);
+    });
+    d.innerHTML = `
+      <div class="project-meta">
+        <div class="project-tag"><span class="dash">—</span> ${p.tag}</div>
+        <h3 class="project-title">${p.title}</h3>
+        <div class="project-stat-row">${p.stats.map(s=>`<div class="project-stat"><div class="k">${s.k}</div><div class="v">${s.v}</div></div>`).join("")}</div>
       </div>
-    </section>
-  );
-}
+      <div class="project-body">
+        <p class="project-desc">${p.desc}</p>
+        <div class="project-stack">${p.stack.map(s=>`<span class="stack-tag">${s}</span>`).join("")}</div>
+      </div>`;
+    pg.appendChild(d);
+  });
 
-/* ── FOOTER ── */
-function Footer() {
-  return (
-    <footer className="footer">
-      <div>© 2026 · Tanmay Kolte · Pune, IN</div>
-      <div>Crafted with code · <span style={{ color:"var(--accent-1)" }}>try typing</span> <code style={{ background:"rgba(255,255,255,.05)",padding:"2px 6px",borderRadius:4 }}>ml</code></div>
-    </footer>
-  );
-}
+  // Experience
+  const tl = document.getElementById("timeline");
+  EXPERIENCE.forEach((e, i) => {
+    const d = document.createElement("div");
+    d.className = "timeline-item reveal";
+    d.style.cssText = `--d:${i*100}ms`;
+    d.innerHTML = `<div class="timeline-date">${e.date}</div><h3 class="timeline-role">${e.role}</h3><div class="timeline-org">${e.org}</div><p class="timeline-desc">${e.desc}</p><div class="timeline-stack">${e.stack.map(s=>`<span class="stack-tag">${s}</span>`).join("")}</div>`;
+    tl.appendChild(d);
+  });
+
+  // Education
+  const el = document.getElementById("edu-list");
+  EDUCATION.forEach(e => {
+    const d = document.createElement("div");
+    d.className = "edu-card";
+    d.innerHTML = `<h3>${e.deg}</h3><div class="org">${e.org}</div><div class="meta"><span>${e.period}</span><span>${e.grade}</span></div>`;
+    el.appendChild(d);
+  });
+
+  // Certs
+  const cl = document.getElementById("cert-list");
+  CERTS.forEach(c => {
+    const d = document.createElement("div");
+    d.className = "cert-row";
+    d.innerHTML = `<div class="cert-name">${c.name}<span>${c.org}</span></div><div class="cert-date">${c.date}</div>`;
+    cl.appendChild(d);
+  });
+})();
+
+/* ── NEURAL NETWORK CANVAS ── */
+(function initCanvas() {
+  const canvas = document.getElementById("hero-canvas");
+  const ctx = canvas.getContext("2d");
+  let raf, w, h, dpr, nodes;
+  const mouse = { x: -9999, y: -9999 };
+  const A1 = "#ff85b8", A2 = "#ffb273";
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth; h = window.innerHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const N = Math.min(80, Math.floor((w * h) / 18000));
+    nodes = Array.from({ length: N }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .25,
+      r: Math.random() * 1.4 + .4,
+    }));
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, w, h);
+    for (let i = 0; i < nodes.length; i++) {
+      const a = nodes[i];
+      a.x += a.vx; a.y += a.vy;
+      if (a.x < 0 || a.x > w) a.vx *= -1;
+      if (a.y < 0 || a.y > h) a.vy *= -1;
+      const mdx = a.x - mouse.x, mdy = a.y - mouse.y, md = Math.hypot(mdx, mdy);
+      if (md < 140) { a.x += (mdx / md) * .8; a.y += (mdy / md) * .8; }
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b = nodes[j];
+        const d = Math.hypot(a.x - b.x, a.y - b.y);
+        if (d < 160) {
+          const alpha = (1 - d / 160) * .45;
+          const grad = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
+          grad.addColorStop(0, A1); grad.addColorStop(1, A2);
+          ctx.strokeStyle = grad; ctx.globalAlpha = alpha; ctx.lineWidth = .6;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+      }
+    }
+    ctx.globalAlpha = 1;
+    for (const n of nodes) {
+      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = A1; ctx.fill();
+    }
+    raf = requestAnimationFrame(loop);
+  }
+
+  resize();
+  window.addEventListener("resize", resize);
+  window.addEventListener("mousemove", e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+  loop();
+})();
+
+/* ── TEXT SCRAMBLE ── */
+(function initScramble() {
+  const CHARS = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&*<>/{}[]";
+  function scramble(el, target, duration) {
+    const start = performance.now();
+    const len = target.length;
+    function frame(t) {
+      const progress = Math.min(1, (t - start) / duration);
+      let s = "";
+      for (let i = 0; i < len; i++) {
+        const cp = Math.min(1, Math.max(0, (progress - i / len * .6) * 2.5));
+        if (target[i] === " ") { s += " "; continue; }
+        s += cp >= 1 ? target[i] : CHARS[Math.floor(Math.random() * CHARS.length)];
+      }
+      el.textContent = s;
+      if (progress < 1) requestAnimationFrame(frame);
+      else el.textContent = target;
+    }
+    requestAnimationFrame(frame);
+  }
+  scramble(document.getElementById("scramble-first"), "TANMAY", 900);
+  scramble(document.getElementById("scramble-last"),  "KOLTE",  1400);
+})();
+
+/* ── TYPEWRITER ── */
+(function initTypewriter() {
+  const text = "Building data-driven, hardware-aware AI systems — from sensors to LLMs.";
+  const content = document.getElementById("typewriter-content");
+  const cursor  = document.getElementById("typewriter-cursor");
+  let i = 0;
+  setTimeout(() => {
+    const id = setInterval(() => {
+      i++;
+      content.textContent = text.slice(0, i);
+      if (i >= text.length) { clearInterval(id); cursor.style.display = "none"; }
+    }, 22);
+  }, 1500);
+})();
+
+/* ── NAV: scroll state + active section ── */
+(function initNav() {
+  const nav = document.getElementById("main-nav");
+  const links = document.querySelectorAll("[data-section]");
+
+  window.addEventListener("scroll", () => {
+    nav.classList.toggle("scrolled", window.scrollY > 20);
+  }, { passive: true });
+
+  const ids = ["top","about","skills","work","experience","education","contact"];
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(a => a.classList.toggle("active", a.dataset.section === e.target.id));
+      }
+    });
+  }, { rootMargin:"-40% 0% -55% 0%" });
+  ids.forEach(id => { const el = document.getElementById(id); if (el) obs.observe(el); });
+})();
+
+/* ── CURSOR GLOW ── */
+(function initGlow() {
+  const glow = document.getElementById("cursor-glow");
+  window.addEventListener("mousemove", e => {
+    glow.style.left = e.clientX + "px";
+    glow.style.top  = e.clientY + "px";
+  }, { passive: true });
+})();
+
+/* ── SCROLL REVEAL ── */
+(function initReveal() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); obs.unobserve(e.target); } });
+  }, { threshold:.12, rootMargin:"0px 0px -8% 0px" });
+  document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
+})();
 
 /* ── MATRIX OVERLAY ── */
-function MatrixOverlay({ show, onDone }) {
-  const ref = useRef(null);
-  useEffect(() => {
-    if (!show) return;
-    const canvas = ref.current; if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
-    resize();
+(function initMatrix() {
+  const overlay = document.getElementById("matrix-overlay");
+  const canvas  = document.getElementById("matrix-canvas");
+  const ctx = canvas.getContext("2d");
+  let raf, drops, frames, active = false;
+
+  function startMatrix() {
+    if (active) return;
+    active = true;
+    overlay.classList.add("show");
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
     const cols = Math.floor(canvas.width / 18);
-    const drops = Array(cols).fill(0).map(() => Math.random() * canvas.height);
+    drops = Array(cols).fill(0).map(() => Math.random() * (canvas.height / 18));
+    frames = 0;
     const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノ∑∏λμπδ∇∂".split("");
-    let raf, frames = 0;
-    const draw = () => {
+    function draw() {
       ctx.fillStyle = "rgba(0,0,0,0.08)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "#ff85b8"; ctx.font = "16px JetBrains Mono, monospace";
       for (let i = 0; i < cols; i++) {
-        const t = chars[Math.floor(Math.random() * chars.length)];
-        ctx.fillText(t, i * 18, drops[i] * 18);
+        ctx.fillText(chars[Math.floor(Math.random() * chars.length)], i * 18, drops[i] * 18);
         if (drops[i] * 18 > canvas.height && Math.random() > .97) drops[i] = 0;
         drops[i]++;
       }
       frames++;
       if (frames < 240) raf = requestAnimationFrame(draw);
-      else onDone();
-    };
-    draw();
-    window.addEventListener("resize", resize);
-    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", resize); };
-  }, [show, onDone]);
-  return (
-    <div className={"matrix-overlay " + (show ? "show" : "")}>
-      <canvas ref={ref} />
-      {show && <div className="matrix-hint">// model.train() · esc to exit</div>}
-    </div>
-  );
-}
-
-/* ── APP ROOT ── */
-function App() {
-  const [active, setActive] = useState("top");
-  const [matrix, setMatrix] = useState(false);
-  const [toast, setToast] = useState(null);
-
-  const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(null), 2200); };
-
-  /* Remove preloader once React has painted */
-  useEffect(() => {
-    const pl = document.getElementById("preloader");
-    if (!pl) return;
-    pl.style.opacity = "0";
-    const t = setTimeout(() => pl.remove(), 500);
-    return () => clearTimeout(t);
-  }, []);
-
-  /* Cursor glow */
-  useEffect(() => {
-    const el = document.querySelector(".cursor-glow");
-    const fn = (e) => { if (el) { el.style.left = e.clientX + "px"; el.style.top = e.clientY + "px"; } };
-    window.addEventListener("mousemove", fn);
-    return () => window.removeEventListener("mousemove", fn);
-  }, []);
-
-  /* Active section */
-  useEffect(() => {
-    const ids = ["top","about","skills","work","experience","education","contact"];
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
-    }, { rootMargin:"-40% 0% -55% 0%" });
-    ids.forEach(id => { const el = document.getElementById(id); if (el) obs.observe(el); });
-    return () => obs.disconnect();
-  }, []);
-
-  /* Scroll reveal — arm after preloader fades so elements don't flash */
-  useEffect(() => {
-    const arm = setTimeout(() => {
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); obs.unobserve(e.target); } });
-      }, { threshold:.12, rootMargin:"0px 0px -8% 0px" });
-      document.querySelectorAll(".reveal").forEach(el => {
-        el.classList.add("reveal-ready");
-        obs.observe(el);
-      });
-    }, 550);
-    return () => clearTimeout(arm);
-  }, []);
-
-  /* Easter eggs */
-  useEffect(() => {
-    let typed = "";
-    const KONAMI = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
-    let konami = [];
-    const onKey = (e) => {
-      if (e.key === "Escape") { setMatrix(false); return; }
-      if (e.key.length === 1) {
-        typed = (typed + e.key.toLowerCase()).slice(-6);
-        if (typed.endsWith("ml")) { setMatrix(true); showToast("// model.train() initiated"); typed = ""; }
-        if (typed.endsWith("hire")) { window.location.href = "mailto:koltetanmay7@gmail.com?subject=Let%27s%20talk"; showToast("// opening mailto:"); typed = ""; }
-      }
-      konami.push(e.key);
-      if (konami.length > KONAMI.length) konami.shift();
-      if (konami.length === KONAMI.length && konami.every((k,i) => k === KONAMI[i])) {
-        setMatrix(true); showToast("// KONAMI · neural override"); konami = [];
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    if (!window.__hello) {
-      window.__hello = true;
-      console.log("%cHi, I'm Tanmay 👋", "color:#ff85b8;font-size:13px;font-family:monospace;");
-      console.log("%c// thanks for inspecting. type help() for tricks.", "color:#ffb273;font-size:11px;font-family:monospace;");
-      window.help = () => {
-        console.log("%c· type 'ml' anywhere → matrix mode","color:#ff85b8;font-family:monospace;");
-        console.log("%c· type 'hire' → opens mailto:","color:#ff85b8;font-family:monospace;");
-        console.log("%c· konami code = ↑↑↓↓←→←→BA","color:#ff85b8;font-family:monospace;");
-        console.log("%c· reach me: koltetanmay7@gmail.com","color:#ffb273;font-family:monospace;");
-        return "happy hacking";
-      };
+      else stopMatrix();
     }
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
+    draw();
+  }
 
-  return (
-    <>
-      <div className="cursor-glow" />
-      <Nav active={active} />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Experience />
-      <EducationCerts />
-      <Contact />
-      <Footer />
-      <MatrixOverlay show={matrix} onDone={() => setMatrix(false)} />
-      {toast && <div className="toast show">{toast}</div>}
-      <button
-        className="egg-btn"
-        onClick={() => { setMatrix(true); showToast("// model.train() initiated"); }}
-        title="Try typing 'ml' anywhere, or click for a surprise"
-      >
-        <span className="egg-dot" />
-        <span>type</span>
-        <span className="egg-key">ml</span>
-        <span style={{ color:"var(--fg-mute)" }}>/ click</span>
-      </button>
-    </>
-  );
+  function stopMatrix() {
+    cancelAnimationFrame(raf);
+    active = false;
+    overlay.classList.remove("show");
+  }
+
+  window.__startMatrix = startMatrix;
+  window.__stopMatrix  = stopMatrix;
+  document.getElementById("egg-btn").addEventListener("click", () => { startMatrix(); showToast("// model.train() initiated"); });
+  overlay.addEventListener("click", stopMatrix);
+})();
+
+/* ── TOAST ── */
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2200);
 }
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+/* ── EASTER EGGS ── */
+(function initEasterEggs() {
+  let typed = "";
+  const KONAMI = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
+  let konami = [];
+
+  window.addEventListener("keydown", e => {
+    if (e.key === "Escape") { window.__stopMatrix(); return; }
+    if (e.key.length === 1) {
+      typed = (typed + e.key.toLowerCase()).slice(-6);
+      if (typed.endsWith("ml"))   { window.__startMatrix(); showToast("// model.train() initiated"); typed = ""; }
+      if (typed.endsWith("hire")) { window.location.href = "mailto:koltetanmay7@gmail.com?subject=Let%27s%20talk"; showToast("// opening mailto:"); typed = ""; }
+    }
+    konami.push(e.key);
+    if (konami.length > KONAMI.length) konami.shift();
+    if (konami.length === KONAMI.length && konami.every((k,i) => k === KONAMI[i])) {
+      window.__startMatrix(); showToast("// KONAMI · neural override"); konami = [];
+    }
+  });
+
+  console.log("%cHi, I'm Tanmay 👋", "color:#ff85b8;font-size:13px;font-family:monospace;");
+  console.log("%c// thanks for inspecting. type help() for tricks.", "color:#ffb273;font-size:11px;font-family:monospace;");
+  window.help = () => {
+    console.log("%c· type 'ml' anywhere → matrix mode","color:#ff85b8;font-family:monospace;");
+    console.log("%c· type 'hire' → opens mailto:","color:#ff85b8;font-family:monospace;");
+    console.log("%c· konami code = ↑↑↓↓←→←→BA","color:#ff85b8;font-family:monospace;");
+    console.log("%c· reach me: koltetanmay7@gmail.com","color:#ffb273;font-family:monospace;");
+    return "happy hacking";
+  };
+})();
 </script>
 </body>
 </html>
