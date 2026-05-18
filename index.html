@@ -88,10 +88,7 @@ section.compact { padding-top: calc(var(--section-y) * 0.7); }
 .hero { min-height:100vh; display:grid; place-items:center; padding-top:100px; padding-bottom:80px; position:relative; overflow:hidden; }
 .hero-canvas { position:fixed; inset:0; width:100vw; height:100vh; z-index:0; opacity:0.55; pointer-events:none; }
 .hero-vignette { position:fixed; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 0%,transparent 0%,var(--bg) 75%),linear-gradient(180deg,transparent 0%,transparent 60%,var(--bg) 100%); z-index:1; pointer-events:none; opacity:.65; }
-.hero-card { position:relative; border:1px solid var(--line); border-radius:24px; padding:64px 48px; background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,0)); overflow:hidden; width:100%; display:grid; grid-template-columns:1fr; gap:36px; }
-.hero-card::before { content:""; position:absolute; inset:0; background:radial-gradient(60% 80% at 20% 20%,var(--accent-1-soft),transparent 60%),radial-gradient(60% 80% at 80% 80%,var(--accent-2-soft),transparent 60%); z-index:0; pointer-events:none; }
-.hero-card > * { position:relative; z-index:2; }
-.hero-inner { position:relative; z-index:3; width:100%; max-width:var(--maxw); padding:0 var(--pad); }
+.hero-inner { position:relative; z-index:3; width:100%; max-width:var(--maxw); padding:0 var(--pad); display:grid; grid-template-columns:1fr; gap:36px; text-align:left; }
 .status-pill { display:inline-flex; align-items:center; gap:10px; padding:8px 14px 8px 12px; border-radius:999px; border:1px solid var(--line-strong); background:rgba(255,255,255,.025); font-family:var(--font-mono); font-size:12px; letter-spacing:.05em; color:var(--fg-dim); width:fit-content; }
 .status-pill .dot { width:8px; height:8px; border-radius:50%; background:#4ade80; box-shadow:0 0 10px #4ade80; animation:pulse 2s ease-in-out infinite; }
 .hero-name { font-family:var(--font-display); font-weight:500; font-size:clamp(64px,11vw,168px); line-height:.92; letter-spacing:-.04em; margin:8px 0 4px; }
@@ -277,29 +274,27 @@ section.compact { padding-top: calc(var(--section-y) * 0.7); }
       <span>Data Science</span><span class="sep">/</span>
       <span>Edge &amp; Embedded</span>
     </div>
-    <div class="hero-card">
-      <div class="hero-grid">
-        <div>
-          <div class="hero-tagline" id="typewriter-text">
-            <span id="typewriter-content"></span><span class="cursor-block" id="typewriter-cursor"></span>
-          </div>
-          <p style="margin-top:20px;color:var(--fg-dim);font-size:15px;max-width:38ch">Final-year ECE engineer with hands-on experience shipping end-to-end ML, RAG pipelines, and production SaaS. IIT Guwahati E&amp;ICT certified.</p>
+    <div class="hero-grid">
+      <div>
+        <div class="hero-tagline" id="typewriter-text">
+          <span id="typewriter-content"></span><span class="cursor-block" id="typewriter-cursor"></span>
         </div>
-        <div class="hero-side">
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#work"><span>See my work</span><span class="arrow">→</span></a>
-            <a class="btn btn-primary" href="#contact"><span>Get in touch</span><span class="arrow">→</span></a>
-            <a class="btn btn-primary" href="resume.html" download="Tanmay_Kolte_Resume.html"><span>↓ Resume</span></a>
-          </div>
+        <p style="margin-top:20px;color:var(--fg-dim);font-size:15px;max-width:38ch">Final-year ECE engineer with hands-on experience shipping end-to-end ML, RAG pipelines, and production SaaS. IIT Guwahati E&amp;ICT certified.</p>
+      </div>
+      <div class="hero-side">
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#work"><span>See my work</span><span class="arrow">→</span></a>
+          <a class="btn btn-primary" href="#contact"><span>Get in touch</span><span class="arrow">→</span></a>
+          <a class="btn btn-primary" href="resume.html" download="Tanmay_Kolte_Resume.html"><span>↓ Resume</span></a>
         </div>
       </div>
-      <div class="hero-meta">
-        <div class="meta-item"><div class="k">5<span class="accent">+</span></div><div class="v">Shipped projects</div></div>
-        <div class="meta-item"><div class="k">91.4<span class="accent">%</span></div><div class="v">Edge-AI accuracy</div></div>
-        <div class="meta-item"><div class="k">100<span class="accent">Hz</span></div><div class="v">Real-time DAQ</div></div>
-        <div class="meta-item"><div class="k">70<span class="accent">%</span></div><div class="v">Workload cut (Aeron)</div></div>
-      </div>
-    </div><!-- hero-card -->
+    </div>
+    <div class="hero-meta">
+      <div class="meta-item"><div class="k">5<span class="accent">+</span></div><div class="v">Shipped projects</div></div>
+      <div class="meta-item"><div class="k">91.4<span class="accent">%</span></div><div class="v">Edge-AI accuracy</div></div>
+      <div class="meta-item"><div class="k">100<span class="accent">Hz</span></div><div class="v">Real-time DAQ</div></div>
+      <div class="meta-item"><div class="k">70<span class="accent">%</span></div><div class="v">Workload cut (Aeron)</div></div>
+    </div>
   </div><!-- hero-inner -->
 </section>
 
