@@ -88,6 +88,7 @@ section.compact { padding-top: calc(var(--section-y) * 0.7); }
 .hero { min-height:100vh; display:grid; place-items:center; padding-top:100px; padding-bottom:80px; position:relative; overflow:hidden; }
 .hero-canvas { position:fixed; inset:0; width:100vw; height:100vh; z-index:0; opacity:0.55; pointer-events:none; }
 .hero-vignette { position:fixed; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 0%,transparent 0%,var(--bg) 75%),linear-gradient(180deg,transparent 0%,transparent 60%,var(--bg) 100%); z-index:1; pointer-events:none; opacity:.65; }
+.hero-glow { position:absolute; inset:0; background:radial-gradient(60% 60% at 15% 80%,var(--accent-1-soft),transparent 60%),radial-gradient(50% 50% at 85% 20%,var(--accent-2-soft),transparent 60%); z-index:2; pointer-events:none; }
 .hero-inner { position:relative; z-index:3; width:100%; max-width:var(--maxw); padding:0 var(--pad); display:grid; grid-template-columns:1fr; gap:36px; text-align:left; }
 .status-pill { display:inline-flex; align-items:center; gap:10px; padding:8px 14px 8px 12px; border-radius:999px; border:1px solid var(--line-strong); background:rgba(255,255,255,.025); font-family:var(--font-mono); font-size:12px; letter-spacing:.05em; color:var(--fg-dim); width:fit-content; }
 .status-pill .dot { width:8px; height:8px; border-radius:50%; background:#4ade80; box-shadow:0 0 10px #4ade80; animation:pulse 2s ease-in-out infinite; }
@@ -260,6 +261,7 @@ section.compact { padding-top: calc(var(--section-y) * 0.7); }
 <section id="top" class="hero">
   <canvas class="hero-canvas" id="hero-canvas"></canvas>
   <div class="hero-vignette"></div>
+  <div class="hero-glow"></div>
   <div class="hero-inner">
     <div class="status-pill">
       <span class="dot"></span>
