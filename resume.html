@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tanmay Kolte — AI / ML Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2744;
+      --teal: #0e7490;
+      --teal-light: #e0f2fe;
+      --text: #1e293b;
+      --muted: #475569;
+      --border: #cbd5e1;
+      --bg: #ffffff;
+      --section-gap: 18px;
+    }
+
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      font-size: 10.5pt;
+      color: var(--text);
+      background: #f1f5f9;
+      line-height: 1.5;
+    }
+
+    .page {
+      background: var(--bg);
+      max-width: 850px;
+      margin: 32px auto;
+      padding: 44px 48px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+      border-radius: 4px;
+    }
+
+    /* ── HEADER ── */
+    .header { text-align: center; border-bottom: 2.5px solid var(--navy); padding-bottom: 14px; margin-bottom: var(--section-gap); }
+    .header h1 { font-size: 24pt; font-weight: 700; color: var(--navy); letter-spacing: 2px; text-transform: uppercase; }
+    .header .title { font-size: 11pt; font-weight: 500; color: var(--teal); letter-spacing: 1px; margin-top: 3px; }
+    .header .contact { margin-top: 8px; font-size: 9.5pt; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 18px; }
+    .header .contact a { color: var(--muted); text-decoration: none; }
+    .header .contact a:hover { color: var(--teal); }
+
+    /* ── SECTIONS ── */
+    section { margin-bottom: var(--section-gap); }
+    .section-title {
+      font-size: 9pt;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      border-bottom: 1.5px solid var(--border);
+      padding-bottom: 4px;
+      margin-bottom: 10px;
+    }
+
+    /* ── SUMMARY ── */
+    .summary p { color: var(--text); font-size: 10pt; }
+
+    /* ── SKILLS ── */
+    .skills-grid { display: flex; flex-direction: column; gap: 6px; }
+    .skill-row { display: flex; align-items: flex-start; gap: 10px; }
+    .skill-label { font-weight: 600; color: var(--navy); min-width: 190px; font-size: 10pt; flex-shrink: 0; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .tag {
+      background: var(--teal-light);
+      color: var(--teal);
+      font-size: 8.5pt;
+      font-weight: 500;
+      padding: 2px 9px;
+      border-radius: 12px;
+      border: 1px solid #bae6fd;
+    }
+
+    /* ── EXPERIENCE & PROJECTS ── */
+    .entry { margin-bottom: 13px; }
+    .entry-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px; }
+    .entry-title { font-weight: 700; font-size: 10.5pt; color: var(--navy); }
+    .entry-company { font-weight: 500; font-style: italic; color: var(--muted); font-size: 10pt; }
+    .entry-date { font-size: 9.5pt; color: var(--muted); white-space: nowrap; }
+    .entry-sub { font-size: 9.5pt; color: var(--muted); margin-top: 1px; margin-bottom: 5px; }
+    .entry ul { padding-left: 16px; }
+    .entry ul li { margin-bottom: 3px; font-size: 10pt; color: var(--text); }
+    .entry ul li::marker { color: var(--teal); }
+    .tech-used { font-size: 8.8pt; color: var(--teal); margin-top: 4px; }
+    .tech-used strong { color: var(--navy); }
+
+    /* ── EDUCATION ── */
+    .edu-entry { margin-bottom: 8px; }
+    .edu-degree { font-weight: 600; font-size: 10.5pt; color: var(--navy); }
+    .edu-inst { font-style: italic; color: var(--muted); font-size: 10pt; }
+    .edu-meta { font-size: 9.5pt; color: var(--muted); margin-top: 1px; }
+
+    /* ── CERTIFICATIONS ── */
+    .cert-list { padding-left: 16px; }
+    .cert-list li { margin-bottom: 4px; font-size: 10pt; }
+    .cert-list li::marker { color: var(--teal); }
+    .cert-issuer { color: var(--muted); font-size: 9pt; }
+
+    /* ── ADDITIONAL ── */
+    .additional-row { display: flex; gap: 8px; font-size: 10pt; margin-bottom: 3px; }
+    .additional-label { font-weight: 600; color: var(--navy); }
+
+    /* ── PLACEHOLDER BADGE ── */
+    .placeholder-badge {
+      display: inline-block;
+      background: #fef3c7;
+      color: #92400e;
+      font-size: 7.5pt;
+      font-weight: 600;
+      padding: 1px 7px;
+      border-radius: 10px;
+      border: 1px solid #fcd34d;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      body { background: white; font-size: 10pt; }
+      .page { margin: 0; padding: 30px 36px; box-shadow: none; border-radius: 0; max-width: 100%; }
+      .placeholder-badge { border: 1px solid #999; background: #fffbeb; color: #555; }
+      a { color: inherit !important; text-decoration: none !important; }
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 24px 18px; margin: 0; border-radius: 0; }
+      .skill-label { min-width: 140px; }
+      .entry-header { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <header class="header">
+    <h1>Tanmay Kolte</h1>
+    <div class="title">AI / Machine Learning Engineer &nbsp;|&nbsp; Generative AI &nbsp;|&nbsp; Data Science</div>
+    <div class="contact">
+      <span>+91 95612 72391</span>
+      <a href="mailto:koltetanmay7@gmail.com">koltetanmay7@gmail.com</a>
+      <a href="https://linkedin.com/in/tanmay-kolte" target="_blank">linkedin.com/in/tanmay-kolte</a>
+      <span>Pune, India</span>
+    </div>
+  </header>
+
+  <!-- ── SUMMARY ── -->
+  <section class="summary">
+    <div class="section-title">Summary</div>
+    <p>
+      Final-year Electronics &amp; Telecommunication (IoT) engineer and certified AI/ML practitioner (IIT Guwahati E&amp;ICT Academy)
+      with hands-on experience building data pipelines, machine learning models, and generative AI systems. Delivered end-to-end
+      data-driven solutions for real clients in marketing analytics and renewable energy. Experienced in full-stack AI application
+      development, RAG-based LLM pipelines, and statistical modeling. Brings a unique edge through embedded sensor data
+      acquisition experience, enabling a hardware-to-model perspective on AI systems.
+    </p>
+  </section>
+
+  <!-- ── TECHNICAL SKILLS ── -->
+  <section>
+    <div class="section-title">Technical Skills</div>
+    <div class="skills-grid">
+
+      <div class="skill-row">
+        <div class="skill-label">Languages &amp; Libraries</div>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">C</span>
+          <span class="tag">C++</span>
+          <span class="tag">NumPy</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">Scikit-learn</span>
+          <span class="tag">Matplotlib</span>
+          <span class="tag">Seaborn</span>
+          <span class="tag">SciPy</span>
+          <span class="tag">SQL</span>
+          <span class="tag">PostgreSQL</span>
+        </div>
+      </div>
+
+      <div class="skill-row">
+        <div class="skill-label">Generative AI &amp; LLMs</div>
+        <div class="skill-tags">
+          <span class="tag">LangChain</span>
+          <span class="tag">RAG Pipelines</span>
+          <span class="tag">Prompt Engineering</span>
+          <span class="tag">OpenAI API</span>
+          <span class="tag">FAISS / Vector Stores</span>
+          <span class="tag">LLM Fine-tuning</span>
+        </div>
+      </div>
+
+      <div class="skill-row">
+        <div class="skill-label">Machine Learning</div>
+        <div class="skill-tags">
+          <span class="tag">Supervised Learning</span>
+          <span class="tag">EDA &amp; Feature Engineering</span>
+          <span class="tag">Hypothesis Testing</span>
+          <span class="tag">Time Series Analysis</span>
+          <span class="tag">Computer Vision (basics)</span>
+          <span class="tag">TensorFlow / PyTorch</span>
+        </div>
+      </div>
+
+      <div class="skill-row">
+        <div class="skill-label">MLOps &amp; Infrastructure</div>
+        <div class="skill-tags">
+          <span class="tag">Docker</span>
+          <span class="tag">Git &amp; GitHub</span>
+          <span class="tag">REST APIs</span>
+          <span class="tag">Node.js / Express</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Prisma ORM</span>
+          <span class="tag">AWS (basics)</span>
+        </div>
+      </div>
+
+      <div class="skill-row">
+        <div class="skill-label">Embedded / IoT Edge</div>
+        <div class="skill-tags">
+          <span class="tag">STM32 / ESP32</span>
+          <span class="tag">CAN Bus Telemetry</span>
+          <span class="tag">Sensor Integration</span>
+          <span class="tag">Real-time Data Acquisition</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── PROFESSIONAL EXPERIENCE ── -->
+  <section>
+    <div class="section-title">Professional Experience</div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div>
+          <span class="entry-title">Hardware Design Team Intern</span>
+          <span class="entry-company"> &nbsp;|&nbsp; Aeron Systems, Pune</span>
+        </div>
+        <div class="entry-date">Sep 2025 – Mar 2026</div>
+      </div>
+      <ul>
+        <li>Built <strong>Circuit Cloud</strong> — a full-stack internal SaaS platform giving the design team direct, browser-based access to a centralized component library of 500+ parts, replacing manual spreadsheet workflows and cutting team workload by <strong>70%</strong>.</li>
+        <li>Designed and implemented the component database schema, search, and filtering system; standardized part selection across three engineering teams and reduced design-cycle time by an estimated 20%.</li>
+        <li>Delivered end-to-end: requirements gathering, backend API, frontend UI, and deployment — functioning as the sole developer on a production internal tool used daily across active product lines.</li>
+      </ul>
+      <div class="tech-used"><strong>Stack:</strong> React, Node.js, Express, PostgreSQL, REST APIs, Docker</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div>
+          <span class="entry-title">Low-Voltage &amp; Data Acquisition Lead</span>
+          <span class="entry-company"> &nbsp;|&nbsp; STES Racing (Formula Student Electric)</span>
+        </div>
+        <div class="entry-date">Oct 2023 – Aug 2024</div>
+      </div>
+      <ul>
+        <li>Engineered a real-time telemetry data pipeline on STM32 for the Accelerator Pedal Position Sensor System (APPSS), streaming multi-channel sensor data at 100 Hz over CAN bus — providing structured, timestamped datasets for downstream vehicle performance analysis.</li>
+        <li>Led a team of four engineers through system design, sensor calibration, wiring, and full-stack integration of high-voltage (600 V) and low-voltage (12 V) domains over a 10-month cycle.</li>
+        <li>Architected the Brake System Plausibility Device (BSPD), a safety-critical analog circuit compliant with Formula Student Technical Regulations.</li>
+      </ul>
+      <div class="tech-used"><strong>Stack:</strong> STM32 (ARM Cortex-M3), CAN Bus, GPIO, ADC, Embedded C, Real-time Data Logging</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div>
+          <span class="entry-title">Engineering Intern</span>
+          <span class="entry-company"> &nbsp;|&nbsp; Electronet Equipments Pvt. Ltd.</span>
+        </div>
+        <div class="entry-date">Feb 2024 – Mar 2024</div>
+      </div>
+      <ul>
+        <li>Supported end-to-end PCB fabrication and QA workflows for 50+ boards; conducted calibration and functional testing using oscilloscopes and multimeters, achieving a 98% pre-delivery pass rate.</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <!-- ── PROJECTS ── -->
+  <section>
+    <div class="section-title">Projects</div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div><span class="entry-title">EDA &amp; Hypothesis Testing on Client Marketing Data</span></div>
+        <div class="entry-date">Client Project</div>
+      </div>
+      <ul>
+        <li>Performed comprehensive exploratory data analysis on a marketing agency's campaign dataset to identify high-performing audience segments and channel ROI drivers.</li>
+        <li>Applied statistical hypothesis tests (t-tests, chi-square, ANOVA) and correlation analysis to validate campaign assumptions; delivered actionable insights through Seaborn visualizations and a structured report.</li>
+      </ul>
+      <div class="tech-used"><strong>Stack:</strong> Python, Pandas, NumPy, SciPy, Matplotlib, Seaborn</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div><span class="entry-title">SaaS Platform for Mid-Scale Business</span></div>
+        <div class="entry-date">Full-Stack / AI-Integrated Project</div>
+      </div>
+      <ul>
+        <li>Architected and shipped a complete multi-tenant SaaS application with role-based access control, real-time data dashboards, and automated reporting for business operations.</li>
+        <li>Designed a PostgreSQL schema with Prisma ORM supporting multi-organization isolation; containerized the full stack with Docker for reproducible cloud deployment.</li>
+      </ul>
+      <div class="tech-used"><strong>Stack:</strong> React, Node.js, Express, PostgreSQL, Prisma, Docker, JWT, REST APIs</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div><span class="entry-title">Edge AI Cloud Detection System for Solar Power Plants</span></div>
+        <div class="entry-date">Academic Project, NBNSSOE &nbsp;|&nbsp; 2025–2026</div>
+      </div>
+      <ul>
+        <li>Designed and implemented a full end-to-end Edge AI pipeline on Raspberry Pi 4B for real-time sky cloud classification, achieving <strong>91.4% accuracy</strong> (5-class MobileNetV2, INT8 quantized TFLite) and irradiance prediction with <strong>MAE 8.2 W/m² and R² 0.94</strong> against a calibrated reference pyranometer.</li>
+        <li>Built an OpenCV image processing pipeline with RBR colour-space segmentation and morphological refinement; fused multi-sensor data (DHT22, BMP280, TSL2591) for ramp-event detection and 5–15 minute ahead solar irradiance forecasting.</li>
+        <li>Architected MQTT-based IoT telemetry with QoS-1 delivery, SQLite time-series logging, and a Flask operator dashboard — achieving end-to-end inference latency of under <strong>1.6 seconds</strong> at a total hardware cost of INR 14,880.</li>
+      </ul>
+      <div class="tech-used"><strong>Stack:</strong> Python, OpenCV, TensorFlow Lite, MobileNetV2, NumPy, Scikit-learn, MQTT, SQLite, Flask, Raspberry Pi 4B, Sensor Fusion</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div><span class="entry-title">Client Landing Pages &amp; Web Delivery</span></div>
+        <div class="entry-date">Freelance</div>
+      </div>
+      <ul>
+        <li>Designed and delivered multiple production landing pages for paying clients, managing end-to-end requirements, iteration, and deployment — demonstrating client-facing delivery and product sensibility.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div><span class="entry-title">FPV Drone for Surveillance &amp; Monitoring with Onboard Computer Vision</span></div>
+        <div class="entry-date">Jun 2025 – Present</div>
+      </div>
+      <ul>
+        <li>Building a first-person-view (FPV) surveillance drone with an onboard computer vision pipeline for real-time object detection and tracking; handling flight-controller configuration, PID tuning, and IMU-based sensor fusion.</li>
+        <li>Integrating a YOLOv8 inference pipeline on a companion compute board to perform real-time object detection on live camera feed at 30+ FPS, enabling autonomous target identification during flight.</li>
+        <li>Designing a video frame pre-processing pipeline (OpenCV) for stabilization, contrast enhancement, and ROI extraction before YOLO inference — optimizing latency for onboard edge deployment.</li>
+      </ul>
+      <div class="tech-used"><strong>Stack:</strong> Python, YOLOv8, OpenCV, TensorFlow Lite, Betaflight, IMU / Sensor Fusion, Real-time Inference</div>
+    </div>
+
+  </section>
+
+  <!-- ── EDUCATION ── -->
+  <section>
+    <div class="section-title">Education</div>
+
+    <div class="edu-entry">
+      <div class="edu-degree">B.E. (Hons.) Electronics &amp; Telecommunication Engineering — Internet of Things</div>
+      <div class="edu-inst">NBN Sinhgad School of Engineering, Pune &nbsp;|&nbsp; Savitribai Phule Pune University (SPPU)</div>
+      <div class="edu-meta">2022 – 2026 &nbsp;|&nbsp; CGPA: 8.1 / 10</div>
+    </div>
+
+    <div class="edu-entry">
+      <div class="edu-degree">Higher Secondary (12th Science)</div>
+      <div class="edu-inst">MIT Junior College, Pune</div>
+      <div class="edu-meta">2021 – 2022 &nbsp;|&nbsp; 72.83%</div>
+    </div>
+
+    <div class="edu-entry">
+      <div class="edu-degree">Secondary (10th)</div>
+      <div class="edu-inst">Aaryans World School, Pune</div>
+      <div class="edu-meta">2019 – 2020 &nbsp;|&nbsp; 84.6%</div>
+    </div>
+  </section>
+
+  <!-- ── CERTIFICATIONS ── -->
+  <section>
+    <div class="section-title">Certifications</div>
+    <ul class="cert-list">
+      <li>
+        <strong>Professional Certification in AI and Machine Learning</strong>
+        <span class="cert-issuer"> — IIT Guwahati E&amp;ICT Academy &nbsp;(Jun 2025 – Mar 2026)</span>
+      </li>
+      <li>
+        <strong>VLSI SoC Design (Verilog HDL)</strong>
+        <span class="cert-issuer"> — Maven Silicon &nbsp;(May – Jun 2025)</span>
+      </li>
+      <li>
+        <strong>Electric Systems Officer Level 3E (HV Qualified Person)</strong>
+        <span class="cert-issuer"> — Skillshark India &nbsp;(May – Jun 2025)</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ── ADDITIONAL ── -->
+  <section>
+    <div class="section-title">Additional</div>
+    <div class="additional-row">
+      <span class="additional-label">Languages:</span>
+      <span>English (professional), Marathi (native), Hindi (professional)</span>
+    </div>
+    <div class="additional-row">
+      <span class="additional-label">Interests:</span>
+      <span>Football (Super Division, Pune), FPV Drone Piloting, 3D Printing, Chess</span>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
