@@ -230,66 +230,81 @@ section.compact { padding-top: calc(var(--section-y) * 0.7); }
 .egg-btn .egg-dot { width:6px; height:6px; border-radius:50%; background:var(--accent-1); box-shadow:0 0 8px var(--accent-1); animation:pulse 2.2s ease-in-out infinite; }
 @media(max-width:600px){ .egg-btn{font-size:10px;padding:8px 12px;bottom:14px;left:14px;} }
 
-/* ── MOBILE ── */
+/* ── TABLET (≤760px already handled above) ── */
+@media(max-width:600px){
+  .nav-cta { display:none; }
+}
+
+/* ── MOBILE (≤480px) ── */
 @media(max-width:480px){
   :root { --pad:16px; --section-y:80px; }
 
   /* Nav */
-  .nav-inner { padding:12px var(--pad); }
-  .nav-cta { display:none; }
+  .nav-inner { padding:11px var(--pad); gap:12px; }
   .brand { font-size:12px; }
 
-  /* Hero */
-  .hero { padding-top:76px; padding-bottom:50px; min-height:auto; }
-  .hero-inner { gap:16px; }
-  .hero-name { font-size:clamp(36px,10.5vw,52px); line-height:.9; white-space:nowrap; }
-  .status-pill { font-size:10px; padding:6px 10px; gap:7px; max-width:100%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .hero-role { font-size:10px; letter-spacing:.08em; gap:5px 8px; }
-  .hero-grid { margin-top:20px; gap:20px; }
-  .hero-tagline { font-size:clamp(17px,4.5vw,21px); }
+  /* Hero — key fix: font scales with vw so name never overflows */
+  .hero { padding-top:72px; padding-bottom:48px; min-height:auto; }
+  .hero-inner { gap:14px; }
+  .hero-name { font-size:9vw; line-height:.92; white-space:nowrap; letter-spacing:-.03em; }
+  .status-pill { font-size:10px; padding:6px 10px; gap:8px; white-space:normal; max-width:100%; }
+  .hero-role { font-size:10px; letter-spacing:.07em; gap:4px 8px; }
+  .hero-grid { margin-top:18px; gap:18px; }
+  .hero-tagline { font-size:clamp(16px,4.2vw,20px); max-width:100%; }
+  .hero-inner p[style] { max-width:100% !important; font-size:14px !important; }
   .hero-actions { gap:8px; width:100%; }
-  .btn { padding:12px 18px; font-size:12px; width:100%; justify-content:center; }
-  .hero-meta { margin-top:32px; gap:12px; padding-top:18px; }
+  .btn { padding:13px 18px; font-size:12px; width:100%; justify-content:center; }
+  .hero-meta { margin-top:28px; gap:10px; padding-top:16px; }
   .meta-item .k { font-size:clamp(20px,5.5vw,28px); }
+  .meta-item .v { font-size:10px; }
 
   /* Sections */
-  .section-title { font-size:clamp(28px,7vw,40px); }
-  .section-sub { font-size:15px; }
+  .section-title { font-size:clamp(26px,6.5vw,38px); }
+  .section-sub { font-size:14px; }
+  .container { padding-left:var(--pad); padding-right:var(--pad); }
 
   /* About */
   .about-text p { font-size:15px; }
   .about-card { padding:18px; }
 
   /* Skills */
-  .skill-head h3 { font-size:18px; }
+  .skill-head h3 { font-size:17px; }
+  .skill-block { padding:18px; }
 
   /* Projects */
-  .project-card { padding:20px; }
-  .project-title { font-size:clamp(20px,5.5vw,26px); }
+  .project-card { padding:18px; gap:14px; }
+  .project-title { font-size:clamp(18px,5vw,24px); }
   .project-stat .k { font-size:20px; }
   .project-desc { font-size:14px; }
 
   /* Timeline */
   .timeline { padding-left:20px; }
   .timeline-item::before { left:-26px; width:10px; height:10px; }
-  .timeline-role { font-size:18px; }
+  .timeline-role { font-size:17px; }
   .timeline-desc { font-size:14px; }
+  .timeline-org { font-size:13px; }
 
   /* Education */
-  .edu-card { padding:18px; }
-  .edu-card h3 { font-size:16px; }
+  .edu-card { padding:16px; }
+  .edu-card h3 { font-size:15px; }
   .edu-card .meta { flex-direction:column; gap:4px; align-items:flex-start; }
-  .cert-row { grid-template-columns:1fr; gap:8px; padding:18px; }
-  .cert-name { font-size:16px; }
+  .cert-row { grid-template-columns:1fr; gap:6px; padding:16px; }
+  .cert-name { font-size:15px; }
 
   /* Contact */
-  .contact-card { padding:40px 24px; border-radius:16px; }
+  .contact-card { padding:36px 20px; border-radius:16px; }
   .contact-links { flex-direction:column; align-items:stretch; gap:10px; }
-  .contact-links a { text-align:center; padding:13px 18px; font-size:13px; }
+  .contact-links a { text-align:center; padding:13px 16px; font-size:13px; }
 
   /* Footer */
-  .footer { padding:24px var(--pad); margin-top:40px; gap:10px; font-size:11px; }
+  .footer { padding:22px var(--pad); margin-top:36px; gap:8px; font-size:11px; }
+
+  /* Egg button — smaller, won't overlap content */
+  .egg-btn { bottom:12px; left:12px; padding:7px 10px; font-size:10px; gap:6px; }
 }
+
+/* Hide cursor glow on touch devices */
+@media(hover:none){ .cursor-glow { display:none; } }
 </style>
 </head>
 <body>
@@ -631,7 +646,8 @@ const CERTS = [
     w = window.innerWidth; h = window.innerHeight;
     canvas.width = w * dpr; canvas.height = h * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const N = Math.min(80, Math.floor((w * h) / 18000));
+    const isMobile = w < 600;
+    const N = isMobile ? Math.min(30, Math.floor((w * h) / 30000)) : Math.min(80, Math.floor((w * h) / 18000));
     nodes = Array.from({ length: N }, () => ({
       x: Math.random() * w, y: Math.random() * h,
       vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .25,
